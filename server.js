@@ -1,7 +1,10 @@
 const port = process.env.PORT || 3000
 const express = require('express')
 
+
 const app = express()
+
+
 
 let h_five = ['51','52','53','54']
 let h_one = ['65','64','63']
@@ -98,7 +101,7 @@ function getHours(min, h) {
             break;
         case 7:
             timeString += " sieben " //Fuenf
-            timeArray = timeArray.push(h_seven) //Uhr
+            timeArray = timeArray.concat(h_seven) //Uhr
             break;
         case 8:
             timeString += " acht " //Fuenf
@@ -110,7 +113,7 @@ function getHours(min, h) {
             break;
         case 10:
             timeString += " zehn " //Fuenf
-            timeArray = timeArray.push(h_ten) //Uhr
+            timeArray = timeArray.concat(h_ten) //Uhr
             break;
         case 11:
             timeArray = timeArray.concat(h_eleven) //Uhr
@@ -145,13 +148,18 @@ app.get('/', (req, res) => {
     res.json({"value1":2.3, "value2":22.4, "value3":121212996.5})
 })
 
+app.get('/getAlexaTimer', (req, res) => {
+    console.log("Zahl: " + req.query.zahl)
+    res.json({"value1":2.3, "value2":22.4, "value3":121212996.5})
+})
+
 
 app.get('/getTime', (req, res) => {
     getTimeLED()
     res.json({timeArray})
 })
 
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
